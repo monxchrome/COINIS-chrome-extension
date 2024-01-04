@@ -1,0 +1,16 @@
+.Clock {
+    padding-top: 10vh;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    font-size: 100px;
+    text-align: center;
+    color: white
+}
+
+.Date {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    text-align: center;
+    color: white
+}

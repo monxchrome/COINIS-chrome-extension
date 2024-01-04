@@ -1,0 +1,74 @@
+.PasswordLabel {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+    text-align: center;
+    color: white;
+}
+
+.Father {
+    margin-top: 10vh;
+}
+
+.InputContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+    width: 391px;
+    height: 59px;
+    box-shadow: 0px 3px 6px #00000029;
+    background: none;
+    border: 0.5px solid #E8E8E8;
+    border-radius: 30px;
+    opacity: 1;
+    backdrop-filter: blur(30px) brightness(145%);
+    -webkit-backdrop-filter: blur(30px) brightness(145%);
+    font-size: 30px;
+    padding: 20px;
+    color: white;
+}
+
+.MainButton {
+    display: flex;
+    justify-content: center;
+}
+
+.Buttons {
+    margin-top: 10vh;
+}
+
+.Button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    text-decoration: none;
+
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+    line-height: 1.5;
+
+    width: 152px;
+    height: 59px;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 0.5px solid #E8E8E8;
+    border-radius: 30px;
+    opacity: 1;
+    backdrop-filter: blur(30px) brightness(125%);
+    -webkit-backdrop-filter: blur(30px) brightness(125%);
+}
+
+.Skip {
+    margin-top: 1vh;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: normal;
+    font-size: 15px;
+    text-align: center;
+    color: white;
+}

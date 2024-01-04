@@ -1,0 +1,40 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.Text {
+    color: white;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 120px;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.Button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    text-decoration: none;
+
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+    line-height: 1.5;
+
+    width: 152px;
+    height: 59px;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 0.5px solid #E8E8E8;
+    border-radius: 30px;
+    opacity: 1;
+    backdrop-filter: blur(30px) brightness(125%);
+    -webkit-backdrop-filter: blur(30px) brightness(125%);
+}
