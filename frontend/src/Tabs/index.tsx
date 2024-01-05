@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import Tabs from './Tabs';
 import { HashRouter as Router } from 'react-router-dom';
 import { NextUIProvider } from '@nextui-org/react';
+import { AuthProvider } from '../Contexts/AuthContext';
 
 
 function init() {
@@ -12,7 +13,15 @@ function init() {
         throw new Error("Cannot find app container.")
     }
     const root = createRoot(appContainer)
-    root.render(<NextUIProvider><Router><Tabs/></Router></NextUIProvider>)
+    root.render(
+    <NextUIProvider>
+        <Router>
+            <AuthProvider>
+                <Tabs/>
+            </AuthProvider>
+        </Router>
+    </NextUIProvider>
+    )
 };
 
 init();
