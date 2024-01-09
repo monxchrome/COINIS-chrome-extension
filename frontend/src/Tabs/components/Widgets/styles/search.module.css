@@ -8,10 +8,17 @@
 }
 
 .Input {
+    margin-left: 10px;
     border: none;
     outline: none;
     font-size: 16px;
-    width: 100%;
+    width: 100%; /* Set an initial smaller width */
+    transition: width 0.3s ease; /* Add transition property */
+    background-color: rgba(255, 255, 255, 0);
+}
+
+.Input:focus {
+    width: 100%; /* Expand to 100% on focus */
 }
 
 .Search {
@@ -28,7 +35,8 @@
     line-height: 1.5;
 
     margin-top: 35vh;
-    width: 440px;
+    width: 250px; /* Initial width of the search container */
+    transition: width 0.3s ease; /* Add transition property */
     height: 60px;
     box-shadow: 0px 3px 6px #00000029;
     border: 0.5px solid #E8E8E8;
@@ -37,6 +45,10 @@
     background: rgba(255, 255, 255, 0.227);
     backdrop-filter: blur(30px) brightness(145%);
     -webkit-backdrop-filter: blur(30px) brightness(145%);
+}
+
+.Search:focus-within {
+    width: 400px; /* Expand to 100% on focus */
 }
 
 .Tabs {

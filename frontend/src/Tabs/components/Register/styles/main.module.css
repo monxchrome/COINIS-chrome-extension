@@ -16,7 +16,7 @@
     align-items: center;
 }
 
-input {
+.Input {
     width: 391px;
     height: 59px;
     box-shadow: 0px 3px 6px #00000029;

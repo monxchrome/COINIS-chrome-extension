@@ -4,6 +4,7 @@ import Tabs from './Tabs';
 import { HashRouter as Router } from 'react-router-dom';
 import { NextUIProvider } from '@nextui-org/react';
 import { AuthProvider } from '../Contexts/AuthContext';
+import { SwitchProvider } from '../Contexts/SwitchContext';
 
 
 function init() {
@@ -17,7 +18,9 @@ function init() {
     <NextUIProvider>
         <Router>
             <AuthProvider>
-                <Tabs/>
+                <SwitchProvider>
+                    <Tabs/>
+                </SwitchProvider>
             </AuthProvider>
         </Router>
     </NextUIProvider>
