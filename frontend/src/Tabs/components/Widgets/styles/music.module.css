@@ -1,0 +1,36 @@
+.Container {
+    position: relative;
+}
+
+.ContainerActive {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    align-items: flex-end;
+}
+
+.MusicIcon {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+.Main {
+    width: 400px;
+    height: 150px;
+
+    margin-bottom: 1vh;
+
+    box-shadow: var(--box-shadow);
+    border-radius: 30px;
+    opacity: 1;
+    backdrop-filter: var(--backdrop-filter);
+    -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+}
+
+.Player {
+    width: 400px;
+    height: 150px;
+}

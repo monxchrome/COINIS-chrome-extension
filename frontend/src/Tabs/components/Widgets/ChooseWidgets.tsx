@@ -41,7 +41,7 @@ const ChooseWidgets = () => {
                 aria-label={switchItem.label}
                 style={{ margin: "5px" }}
                 onChange={() => handleSwitchChange(switchItem.value)}
-                checked={switchStates[switchItem.value]}
+                isSelected={switchStates[switchItem.value]}
             >
                 <span style={{ color: "white" }}>{switchItem.label}</span>
             </Switch>

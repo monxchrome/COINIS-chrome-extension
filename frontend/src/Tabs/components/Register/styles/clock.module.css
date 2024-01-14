@@ -4,7 +4,7 @@
     font-weight: 400;
     font-size: 100px;
     text-align: center;
-    color: white
+    color: var(--color)
 }
 
 .Date {
@@ -12,5 +12,5 @@
     font-weight: 400;
     font-size: 30px;
     text-align: center;
-    color: white
+    color: var(--color)
 }
