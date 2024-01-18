@@ -9,27 +9,31 @@ import Buttons from "../components/Main/Buttons";
 import { useSwitchContext } from "../../Contexts/SwitchContext";
 import Music from "../components/Widgets/Music";
 import DarkMode from "../components/Widgets/DarkMode";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const MainPage = () => {
   const { switchStates } = useSwitchContext();
-  const { isLoggedIn, logout } = useAuth();
+  const { isLoggedIn } = useAuth();
 
   if (!isLoggedIn) {
     <Navigate to={'/register'} />
   }
   
   return (
-    <div className={css.Main}>
-      <Clock />
-      <Main />
-      <Buttons />
-      <div className={css.MusicContainer}>
-        {switchStates.Music && <Music />}
+    <DndProvider backend={HTML5Backend}>
+      <div className={css.Main}>
+        <Clock />
+        <Main />
+        <Buttons />
+        <div className={css.MusicContainer}>
+          {switchStates.Music && <Music />}
+        </div>
+        <div className={css.DarkModeContainer}>
+          {switchStates.DarkMode && <DarkMode />}
+        </div>
       </div>
-      <div className={css.DarkModeContainer}>
-        {switchStates.DarkMode && <DarkMode />}
-      </div>
-    </div>
+    </DndProvider>
   );
 };
 

@@ -1,0 +1,46 @@
+.Main {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 400px;
+    height: 150px;
+
+    background: var(--background);
+
+    box-shadow: var(--box-shadow);
+    border-radius: 30px;
+    opacity: 1;
+    backdrop-filter: var(--backdrop-filter);
+    -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+}
+
+.Plus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    background: var(--background);
+
+    box-shadow: var(--box-shadow);
+    border-radius: 30px;
+    opacity: 1;
+    backdrop-filter: var(--backdrop-filter);
+    -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+}
+
+.ModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Затемнение фона */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.Modal {
+    padding-bottom: 5px;
+}

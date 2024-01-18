@@ -30,13 +30,13 @@ html[data-theme='light'] {
 }
 
 html[data-theme='dark'] {
-  --background-main: transparent linear-gradient(118deg, #004c72 0%, #005a88 100%) 0% 0% no-repeat padding-box; /* изменен цвет градиента фона */
-  --box-shadow: 0px 3px 6px #ffffff29; /* изменен цвет тени */
-  --border: 0.5px solid #636363; /* изменен цвет границы */
-  --backdrop-filter: blur(30px) brightness(125%); /* изменен эффект backdrop-filter */
+  --background-main: transparent linear-gradient(118deg, #004c72 0%, #005a88 100%) 0% 0% no-repeat padding-box;
+  --box-shadow: 0px 3px 6px #ffffff29;
+  --border: 0.5px solid #636363;
+  --backdrop-filter: blur(30px) brightness(125%);
   --webkit-backdrop-filter: blur(30px) brightness(125%);
-  --color: rgb(255, 255, 255); /* изменен цвет текста */
-  --background: rgba(0, 0, 0, 0.327); /* изменен фон */
-  --backgorund-choice: #0000002f; /* изменен цвет выбранного фона */
-  --background-color: rgba(0, 0, 0, 0); /* изменен цвет фона */
+  --color: rgb(255, 255, 255);
+  --background: rgba(0, 0, 0, 0.327);
+  --backgorund-choice: #0000002f;
+  --background-color: rgba(0, 0, 0, 0);
 }

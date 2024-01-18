@@ -7,3 +7,10 @@
     bottom: 0;
     right: 0;
 }
+
+.SpeedDialContainer {
+    position: fixed;
+    top: 120px;
+    left: 100px;
+    z-index: 999; /* Ensure it appears above other elements */
+}
