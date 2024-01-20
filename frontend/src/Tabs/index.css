@@ -19,23 +19,28 @@ code {
 
 html[data-theme='light'] {
   --background-main: transparent linear-gradient(118deg, #054E74 0%, #389BD9 100%) 0% 0% no-repeat padding-box;
+  --backdrop-filter-special: blur(30px) brightness(55%);
   --box-shadow: 0px 3px 6px #00000029;
   --border: 0.5px solid #E8E8E8;
   --backdrop-filter: blur(30px) brightness(125%);
   --webkit-backdrop-filter: blur(30px) brightness(125%);
   --color: white;
+  --background-special: rgba(0, 0, 0, 0.327);
   --background: rgba(255, 255, 255, 0.227);
+  --background-modal: rgba(255, 255, 255, 0.344);
   --backgorund-choice: #ffffff2f;
   --background-color: rgba(255, 255, 255, 0);
 }
 
 html[data-theme='dark'] {
   --background-main: transparent linear-gradient(118deg, #004c72 0%, #005a88 100%) 0% 0% no-repeat padding-box;
+  --backdrop-filter-special: blur(30px) brightness(105%);
   --box-shadow: 0px 3px 6px #ffffff29;
   --border: 0.5px solid #636363;
   --backdrop-filter: blur(30px) brightness(125%);
   --webkit-backdrop-filter: blur(30px) brightness(125%);
   --color: rgb(255, 255, 255);
+  --background-special: rgba(255, 255, 255, 0.227);
   --background: rgba(0, 0, 0, 0.327);
   --backgorund-choice: #0000002f;
   --background-color: rgba(0, 0, 0, 0);

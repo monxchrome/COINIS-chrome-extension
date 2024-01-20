@@ -5,6 +5,7 @@ import Music from '../Widgets/Music';
 
 import css from './styles/main.module.css'
 import SpeedDial from '../Widgets/SpeedDial';
+import Notebook from '../Widgets/Notebook';
 
 const Main = () => {
     const { switchStates } = useSwitchContext();
@@ -16,6 +17,9 @@ const Main = () => {
             </div>
             <div className={css.SpeedDialContainer}>
                 {switchStates.SpeedDial && <SpeedDial />}
+                <div className={css.NotebookContainer}>
+                    {switchStates.Notebook && <Notebook />}
+                </div>
             </div>
         </div>
     );

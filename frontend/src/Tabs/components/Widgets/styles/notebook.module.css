@@ -1,0 +1,63 @@
+.Main {
+    width: 270px;
+    height: 100px;
+    background: var(--background-special);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 30px;
+    opacity: 1;
+    backdrop-filter: var(--backdrop-filter-special);
+    -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+}
+
+.Text {
+    margin-left: 10px;
+    font-family: 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    text-align: center;
+    color: var(--color)
+}
+
+.Image {
+    width: 40px;
+    height: 40px;
+}
+
+.Modal {
+    opacity: 1;
+    height: 500px;
+    background: var(--background-modal);
+    backdrop-filter: var(--backdrop-filter);
+    -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+}
+
+.Father {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.Mother {
+    background: var(--background);
+    padding: 20px;
+
+    margin: 5px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 30px;
+    opacity: 1;
+    backdrop-filter: var(--backdrop-filter-special);
+    -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+}
+
+.Img {
+    width: 100px;
+    height: 100px;
+}

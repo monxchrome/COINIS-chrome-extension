@@ -12,5 +12,8 @@
     position: fixed;
     top: 20px;
     left: 20px;
-    z-index: 999; /* Ensure it appears above other elements */
+}
+
+.NotebookContainer {
+    margin-top: 20px;
 }
