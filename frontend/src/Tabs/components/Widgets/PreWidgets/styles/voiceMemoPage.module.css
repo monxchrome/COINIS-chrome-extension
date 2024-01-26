@@ -1,0 +1,26 @@
+.Circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #3498db;
+    transition: transform 0.1s ease-out;
+}
+  
+.Circle.active {
+    transform: scale(1.2);
+}
+
+.Button {
+    margin-top: 20px;
+}
+
+.Audio {
+    margin-top: 20px;
+}
+
+.Father {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

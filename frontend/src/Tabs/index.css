@@ -17,6 +17,73 @@ code {
     monospace;
 }
 
+body .ql-toolbar {
+  border: none !important; /* Убираем границу у .ql-toolbar глобально */
+}
+
+body .ql-container {
+  border: none !important; /* Убираем границу у .ql-toolbar глобально */
+}
+
+body .ql-picker {
+  color: white !important; /* Убираем границу у .ql-toolbar глобально */
+}
+
+body .ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-fill,
+.ql-snow .ql-toolbar button:hover:not(.ql-active) .ql-fill,
+.ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar button:hover:not(.ql-active) .ql-stroke.ql-fill {
+  fill: white !important; /* Убираем границу у .ql-toolbar глобально */
+}
+
+body .ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-fill,
+.ql-snow .ql-toolbar button:hover:not(.ql-active) .ql-fill,
+.ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar button:hover:not(.ql-active) .ql-stroke.ql-fill {
+  color: white !important; /* Убираем границу у .ql-toolbar глобально */
+}
+
+body .ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-fill,
+.ql-snow .ql-toolbar button:hover:not(.ql-active) .ql-fill,
+.ql-snow.ql-toolbar button:hover:not(.ql-active) .ql-stroke.ql-fill,
+.ql-snow .ql-toolbar button:hover:not(.ql-active) .ql-stroke.ql-fill {
+  stroke: white !important; /* Убираем границу у .ql-toolbar глобально */
+}
+
+body .ql-snow .ql-stroke {
+  stroke: white !important;
+}
+
+body .ql-snow .ql-stroke-miter {
+  stroke: white !important;
+}
+
+body .ql-snow .ql-fill,
+.ql-snow .ql-stroke.ql-fill {
+  fill: white !important;
+}
+
+body .ql-snow .ql-editor pre.ql-syntax {
+  background-color: white !important
+}
+
+body .ql-snow .ql-picker {
+  color: white !important
+}
+
+body .ql-snow .ql-color-picker.ql-color .ql-picker-item {
+  background-color: white !important;
+}
+
+body .ql-toolbar.ql-snow .ql-color-picker .ql-picker-item.ql-selected,
+.ql-toolbar.ql-snow .ql-color-picker .ql-picker-item:hover {
+  border-color: white !important;
+}
+
+body .ql-snow .ql-tooltip {
+  color: white !important
+}
+
 html[data-theme='light'] {
   --background-main: transparent linear-gradient(118deg, #054E74 0%, #389BD9 100%) 0% 0% no-repeat padding-box;
   --backdrop-filter-special: blur(30px) brightness(55%);

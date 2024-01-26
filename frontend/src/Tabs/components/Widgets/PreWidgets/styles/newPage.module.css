@@ -1,0 +1,30 @@
+.Input {
+    background: var(--background);
+
+    box-shadow: var(--box-shadow);
+    border: none;
+    border-radius: 30px;
+    opacity: 1;
+    backdrop-filter: var(--backdrop-filter);
+    -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+}
+
+.NewQuill {
+    background: var(--background);
+
+    margin-top: 20px;
+    box-shadow: var(--box-shadow);
+    border: none;
+    border-radius: 30px;
+    opacity: 1;
+    backdrop-filter: var(--backdrop-filter);
+    -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+    color: white
+}
+
+.Button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
