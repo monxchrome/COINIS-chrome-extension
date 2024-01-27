@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import css from './styles/voiceMemoPage.module.css';
+import css from './styles/editMemoPage.module.css';
 
 import { openDB } from 'idb';
 
@@ -33,8 +33,6 @@ const EditMemoPage = ({ selectedPage }: any) => {
 
   return (
     <div className={css.EditMemoPage}>
-      <h2>Edit Voice Memo</h2>
-
       {audio && (
         <div>
           <audio ref={audioRef} controls>
