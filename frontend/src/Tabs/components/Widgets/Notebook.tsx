@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  Input,
   Modal,
   ModalBody,
   ModalContent,
@@ -13,10 +12,6 @@ import css from "./styles/notebook.module.css";
 import plus from "../../../assets/resources/plus-solid.svg";
 import book from "../../../assets/resources/book.svg";
 
-import newPage from "../../../assets/resources/newPage.svg";
-import voiceMemo from "../../../assets/resources/voiceMemo.svg";
-import shortNote from "../../../assets/resources/shortNote.svg";
-import photoNote from "../../../assets/resources/photoNote.svg";
 import NewPage from "./PreWidgets/NewPage";
 import EditPage from "./PreWidgets/EditPage";
 import VoiceMemoPage from "./PreWidgets/VoiceMemoPage";
