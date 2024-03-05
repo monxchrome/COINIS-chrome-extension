@@ -6,15 +6,15 @@ import css from './styles/editPage.module.css';
 import { Button, Input } from '@nextui-org/react';
 import { useTheme } from '../../../hooks/useTheme';
 
-const EditPage = ({ selectedPage, onSaveToStorage, onCloseEditPage }: any) => {
+const EditShortPage = ({ selectedPage, onSaveToStorage, onCloseEditPage }: any) => {
   const [content, setContent] = useState('');
-  const [pageName, setPageName] = useState(selectedPage.replace("pageContent_", ""));
+  const [pageName, setPageName] = useState(selectedPage.key.replace("shortContent_", ""));
   const { theme } = useTheme();
 
   useEffect(() => {
     // Load the content of the selected page from storage when the component mounts
     chrome.storage.sync.get(selectedPage, (result) => {
-      setContent(result[selectedPage]);
+      setContent(result.value);
     });
   }, [selectedPage]);
 
@@ -49,14 +49,17 @@ const EditPage = ({ selectedPage, onSaveToStorage, onCloseEditPage }: any) => {
   };
 
   const handleSaveToStorage = async () => {
-    // Update the content of the selected page in storage
-    chrome.storage.sync.remove(selectedPage);
-
-    const newStorageKey = `pageContent_${pageName}`;
-    chrome.storage.sync.set({ [newStorageKey]: content }, () => {
-      console.log('Content and Page Name updated in Chrome Storage:', newStorageKey);
-      onSaveToStorage(newStorageKey); // Notify the parent component about the updated content
-      onCloseEditPage(); // Close the EditPage modal
+    // Remove the content of the selected page from storage
+    chrome.storage.sync.remove([selectedPage.key], () => {
+      console.log('Content removed from Chrome Storage:', selectedPage);
+      
+      // Update the content of the selected page in storage
+      const newStorageKey = `shortContent_${pageName}`;
+      chrome.storage.sync.set({ [newStorageKey]: content }, () => {
+        console.log('Content and Page Name updated in Chrome Storage:', newStorageKey);
+        onSaveToStorage(newStorageKey); // Notify the parent component about the updated content
+        onCloseEditPage(); // Close the EditPage modal
+      });
     });
   };
 
@@ -69,7 +72,7 @@ const EditPage = ({ selectedPage, onSaveToStorage, onCloseEditPage }: any) => {
           type='string'
           value={pageName}
           onValueChange={(value) => setPageName(value)} // Update the local state of pageName
-          color={theme === "dark" ? "secondary" : "primary"}
+          color={theme === "dark" ? "warning" : "primary"}
           label='Page Name'
           placeholder='Enter your page name'
         />
@@ -91,4 +94,4 @@ const EditPage = ({ selectedPage, onSaveToStorage, onCloseEditPage }: any) => {
   );
 };
 
-export default EditPage;
+export default EditShortPage;

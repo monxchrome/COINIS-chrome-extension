@@ -1,0 +1,6 @@
+.Box {
+  gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}

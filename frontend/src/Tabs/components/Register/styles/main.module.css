@@ -24,11 +24,13 @@
     border: var(--border);
     border-radius: 30px;
     opacity: 1;
+    margin-top: 10px;
     backdrop-filter: var(--backdrop-filter);
     -webkit-backdrop-filter: var(--webkit-backdrop-filter);
     font-size: 30px;
     padding: 20px;
     color: var(--color);
+    background: rgba(255, 255, 255, 0.23);
 }
 
 .MainButton {
@@ -62,6 +64,7 @@
     opacity: 1;
     backdrop-filter: var(--backdrop-filter);
     -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+    background: rgba(255, 255, 255, 0.23);
 }
 
 .Skip {

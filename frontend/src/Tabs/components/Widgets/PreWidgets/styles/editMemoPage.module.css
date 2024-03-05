@@ -1,6 +1,99 @@
 .EditMemoPage {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.AudioPlayer {
+  background: var(--background);
+
+  width: 320px;
+  height: 100px;
+
+  box-shadow: var(--box-shadow);
+  border: none;
+  border-radius: 30px;
+  opacity: 1;
+  backdrop-filter: var(--backdrop-filter);
+  -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+  color: white;
+}
+
+.Father {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.Input {
+  margin-left: 10px;
+}
+
+.Flex {
+  display: flex;
+}
+
+.Controls {
+  align-items: center;
+  margin-left: 10px;
+}
+
+.Inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.Button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  margin-right: 10px;
+  color: #333; /* Adjust color as needed */
+}
+
+.Button:focus {
+  outline: none;
+}
+
+.Microphone {
+  margin-right: 30px;
+}
+
+/* Volume and Seekbar controls */
+
+.Input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 3px;
+  background: white;
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.Volume {
+  margin-top: 6px;
+}
+
+.Img {
+  margin-left: 70px;
+}
+
+.Input[type="range"]:focus {
+  margin-left: 10px;
+  outline: none;
+}
+
+.Input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-left: 10px;
+  width: 15px;
+  height: 15px;
+  background: #333; /* Adjust color as needed */
+  border-radius: 50%;
+  cursor: pointer;
 }

@@ -41,9 +41,10 @@ const NewPage = ({ pageName, onSaveToStorage, handleInputChange }: any) => {
   };
 
   const handleSaveToStorage = async () => {
+    const timestamp = Date.now();
     // Use the page name as part of the storage key
     const storageKey = `pageContent_${pageName}`;
-    chrome.storage.sync.set({ [storageKey]: content }, () => {
+    chrome.storage.sync.set({ id: timestamp, [storageKey]: content }, () => {
       console.log('Content saved to Chrome Storage with Key:', storageKey);
       onSaveToStorage(storageKey); // Notify the parent component about the saved key
     });
@@ -61,7 +62,7 @@ const NewPage = ({ pageName, onSaveToStorage, handleInputChange }: any) => {
         label='Page Name'
         placeholder='Enter your page name'
       />
-        <div>
+      <div>
           <ReactQuill
             className={css.NewQuill}
             value={content}

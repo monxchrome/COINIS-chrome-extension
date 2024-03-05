@@ -4,7 +4,7 @@ import { Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../../../Contexts/AuthContext';
 
 const Welcome = () => {
-    const { isLoggedIn, logout } = useAuth();
+    const { isLoggedIn } = useAuth();
     console.log(isLoggedIn)
 
     if (isLoggedIn) {

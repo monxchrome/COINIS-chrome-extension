@@ -57,7 +57,7 @@
 }
 
 .Button {
-    margin-top: 10vh;
+    margin-top: 5vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,4 +79,5 @@
     opacity: 1;
     backdrop-filter: var(--backdrop-filter);
     -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+    background: rgba(255, 255, 255, 0.23);
 }

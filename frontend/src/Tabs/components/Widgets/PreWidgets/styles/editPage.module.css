@@ -1,25 +1,34 @@
 .Input {
-    font-weight: bold;
-    padding-bottom: 20px;
+  background: var(--background);
+
+  box-shadow: var(--box-shadow);
+  border: none;
+  border-radius: 10px;
+  opacity: 1;
+  backdrop-filter: var(--backdrop-filter);
+  -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+
+  font-weight: bold;
 }
 
 .EditQuill {
-    background: var(--background);
+  background: var(--background);
 
-    margin-top: 20px;
+  margin-top: 20px;
+  height: 100px;
 
-    box-shadow: var(--box-shadow);
-    border: none;
-    border-radius: 30px;
-    opacity: 1;
-    backdrop-filter: var(--backdrop-filter);
-    -webkit-backdrop-filter: var(--webkit-backdrop-filter);
-    color: white
+  box-shadow: var(--box-shadow);
+  border: none;
+  border-radius: 10px;
+  opacity: 1;
+  backdrop-filter: var(--backdrop-filter);
+  -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+  color: white;
 }
 
 .Button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }

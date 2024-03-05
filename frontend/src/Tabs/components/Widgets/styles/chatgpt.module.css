@@ -1,0 +1,12 @@
+.Main {
+    margin-right: 10px;
+}
+
+.Frame {
+    width: 330px;
+    height: 702px;
+    border: solid;
+    border-color: #ffffff87;
+    border-width: 1px;
+    border-radius: 4%;
+}

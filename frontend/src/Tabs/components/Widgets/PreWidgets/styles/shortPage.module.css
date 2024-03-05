@@ -3,7 +3,7 @@
 
     box-shadow: var(--box-shadow);
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
     opacity: 1;
     backdrop-filter: var(--backdrop-filter);
     -webkit-backdrop-filter: var(--webkit-backdrop-filter);
@@ -15,7 +15,7 @@
     margin-top: 20px;
     box-shadow: var(--box-shadow);
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
     opacity: 1;
     backdrop-filter: var(--backdrop-filter);
     -webkit-backdrop-filter: var(--webkit-backdrop-filter);
