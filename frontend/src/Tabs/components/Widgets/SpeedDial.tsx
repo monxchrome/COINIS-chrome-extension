@@ -1,14 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Input, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from '@nextui-org/react';
 import { useTheme } from '../../hooks/useTheme';
-import { Navigate } from 'react-router-dom';
 import css from './styles/speedDial.module.css';
 import plus from '../../../assets/resources/plus-solid.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMinus } from '@fortawesome/free-solid-svg-icons';
+import { useSwitchContext } from '../../../Contexts/SwitchContext';
+import { useMouseContext } from '../../../Contexts/MouseContext';
+import useClickOutside from '../../../hoc/useClickOutside';
 
 const SpeedDial = () => {
+    const { handleSwitchChange } = useSwitchContext();
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const { showCloseButton, setShowCloseButton, handleMouseDown, handleMouseUp } = useMouseContext();
     const { theme } = useTheme();
     const [icons, setIcons] = useState([]);
+    const speedDialRef = useRef(null)
   
     const modalStyles = theme === 'dark'
       ? {
@@ -47,12 +54,38 @@ const SpeedDial = () => {
         setIcons(storedIcons);
       });
     }, []);
+
+    const onDelete = () => {
+      handleSwitchChange('SpeedDial')
+    }
+
+    const onDeleteIcons = (indexToDelete: number) => {
+      console.log('deleted');
+      const updatedIcons = icons.filter((_, index) => index !== indexToDelete);
+      chrome.storage.sync.set({ icons: updatedIcons }, () => {
+        setIcons(updatedIcons);
+      });
+    };    
+
+    useClickOutside(speedDialRef, () => setShowCloseButton(false));
   
     return (
-      <div className={css.Main}>
-        {icons.map(({ url, logo }) => (
-          <div key={url} className={css.Plus} onClick={() => handleLogoClick(url)}>
-            <img src={logo} alt="" />
+      <div className={`${css.Main} ${showCloseButton ? css.Shake: ""}`} onMouseDown={handleMouseDown} onMouseUp={handleMouseUp} ref={speedDialRef}>
+        {showCloseButton && (
+          <div className={css.CloseButton} onClick={onDelete}>
+            <FontAwesomeIcon icon={faMinus} />
+          </div>
+        )}
+        {icons.map(({ url, logo }, index) => (
+          <div key={url} className={css.IconContainer}>
+            {showCloseButton && (
+              <div className={css.CloseButtonInclude} onClick={() => onDeleteIcons(index)}>
+                <FontAwesomeIcon icon={faMinus} />
+              </div>
+            )}
+            <div className={css.Plus} onClick={() => handleLogoClick(url)}>
+              <img src={logo} alt="" />
+            </div>
           </div>
         ))}
         {icons.length < 3 && (

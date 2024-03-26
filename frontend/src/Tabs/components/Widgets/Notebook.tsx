@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Modal,
   ModalBody,
@@ -7,159 +7,54 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import { openDB } from "idb";
 import css from "./styles/notebook.module.css";
 import plus from "../../../assets/resources/plus-solid.svg";
 import book from "../../../assets/resources/book.svg";
 
-import NewPage from "./PreWidgets/NewPage";
-import EditPage from "./PreWidgets/EditPage";
-import VoiceMemoPage from "./PreWidgets/VoiceMemoPage";
-import EditMemoPage from "./PreWidgets/EditMemoPage";
-import ShortPage from "./PreWidgets/ShortPage";
-import EditShortPage from "./PreWidgets/EditShortPage";
-import PhotoPage from "./PreWidgets/PhotoPage";
-import Notes from "./PreWidgets/Notes/Notes";
-import Memos from "./PreWidgets/Memo/Memos";
-import Shorts from "./Shorts/Shorts";
-import Photos from "./PreWidgets/Photos/Photos";
 import Pages from "./PreWidgets/Pages/Pages";
+import CreatePages from "./PreWidgets/Pages/CreatePages";
+import EditPages from "./PreWidgets/Pages/EditPages";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMinus } from "@fortawesome/free-solid-svg-icons";
+import { useSwitchContext } from "../../../Contexts/SwitchContext";
+import { useMouseContext } from "../../../Contexts/MouseContext";
+import useClickOutside from "../../../hoc/useClickOutside";
 
 const Notebook = () => {
+  const { handleSwitchChange } = useSwitchContext();
+  const { showCloseButton, setShowCloseButton, handleMouseDown, handleMouseUp } = useMouseContext();
   const [components, setComponents] = useState(false);
   const [page, setPage] = useState(false);
   const [pages, setPages] = useState(true);
   const [pageName, setPageName] = useState("");
-  const [savedPages, setSavedPages] = useState([]);
-  const [shortPages, setShortPages] = useState<any[]>([]);
-  const [memoPages, setMemoPages] = useState<{ id: any; pageName: any }[]>([]);
   const [shortPage, setShortPage] = useState(false);
   const [photoPage, setPhotoPage] = useState(false);
-  const [photos, setPhotos] = useState<{ id: any; data: any }[]>([]);
-  const [selectedMemoPage, setSelectedMemoPage] = useState<{
-    id: any;
-    pageName: any;
-  } | null>(null);
-  const [selectedShortPage, setSelectedShortPage] = useState(false);
-  const [selectedPage, setSelectedPage] = useState(null);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [voiceMemoPage, setVoiceMemoPage] = useState(false);
+  const [selectedNote, setSelectedNote] = useState(null);
+  const [selectedShort, setSelectedShort] = useState(null);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
+  const [showPlus, setShowPlus] = useState(true);
+  const notebookRef = useRef(null);
 
-  const [isEditPageOpen, setIsEditPageOpen] = useState(false);
-
-  useEffect(() => {
-    // Load saved pages from local storage when the component mounts
-    chrome.storage.sync.get(null, items => {
-      const pages = Object.keys(items).filter(key =>
-        key.startsWith("pageContent_")
-      );
-      console.log(pages);
-      //@ts-ignore
-      setSavedPages(pages);
-    });
-
-    chrome.storage.sync.get(null, items => {
-      const shortContents: { key: string; value: string }[] = Object.entries(
-        items
-      )
-        .filter(([key]) => key.startsWith("shortContent_"))
-        .map(([key, value]) => {
-          const modifiedValue = (value as string).replace(/<p>|<\/p>/g, "");
-          console.log(
-            `Key: ${key}, Original Value: ${value}, Modified Value: ${modifiedValue}`
-          );
-          return { key, value: modifiedValue };
-        });
-      setShortPages(shortContents);
-    });
-
-    const getMemoPagesFromIndexedDB = async () => {
-      try {
-        const db = await openDB("VoiceMemosDB", 3);
-
-        const transaction = db.transaction("voiceMemos", "readonly");
-        console.log(transaction);
-        const store = transaction.objectStore("voiceMemos");
-        console.log(store);
-
-        const allItems = await store.getAll();
-        console.log(allItems);
-
-        // Map items to include both id and pageName
-        const memoPages = allItems.map(item => ({
-          id: item.id,
-          pageName: item.pageName,
-        }));
-
-        console.log(memoPages);
-
-        setMemoPages(memoPages);
-      } catch (error) {
-        console.error("Error retrieving memo pages from IndexedDB:", error);
-      }
-    };
-
-    const getPhotosFromIndexedDB = async () => {
-      try {
-        const db = await openDB("photosDB", 3);
-
-        const transaction = db.transaction("photos", "readonly");
-        const store = transaction.objectStore("photos");
-
-        const allItems = await store.getAll();
-
-        // Map items to include both id and pageName
-        const photoPages = allItems.map(item => ({
-          id: item.id,
-          data: item.data,
-        }));
-
-        console.log(photoPages);
-
-        setPhotos(photoPages);
-      } catch (error) {
-        console.error("Error retrieving memo pages from IndexedDB:", error);
-      }
-    };
-
-    getPhotosFromIndexedDB();
-    getMemoPagesFromIndexedDB();
-  }, []); // Run the effect only once when the component mounts
-
-  const onOpenEditPage = () => {
-    setIsEditPageOpen(true);
+  const onSelectNote = (selectedNote: any) => {
+    console.log("Selected note:", selectedNote);
+    setSelectedNote(selectedNote);
   };
 
-  const onCloseEditPage = () => {
-    setIsEditPageOpen(false);
+  const onSelectShort = (selectedShort: any) => {
+    console.log("Selected short:", selectedShort);
+    setSelectedShort(selectedShort);
+  };
+
+  const onSelectPhoto = (selectedPhoto: any) => {
+    console.log("Selected short:", selectedPhoto);
+    setSelectedPhoto(selectedPhoto);
   };
 
   const handleClick = () => {
     setComponents(true);
-  };
-
-  const handlePageClick = () => {
-    setPages(false);
-    setPage(true);
-    setComponents(false);
-  };
-
-  const handleMemoClick = () => {
-    setVoiceMemoPage(true);
-    setPages(false);
-    setComponents(false);
-  };
-
-  const handleShortClick = () => {
-    setShortPage(true);
-    setPages(false);
-    setComponents(false);
-  };
-
-  const handlePhotoClick = () => {
-    setPhotoPage(true);
-    setPages(false);
-    setComponents(false);
   };
 
   const handleInputChange = (e: string) => {
@@ -167,39 +62,57 @@ const Notebook = () => {
   };
 
   const handleSavePage = () => {
-    // Assuming you want to save the page name separately
     chrome.storage.sync.set({ pageName });
   };
 
-  const handleEditPageClick = (key: any) => {
-    setSelectedPage(key);
-    setPages(false);
-    setPage(false);
+  const handleModalClose = () => {
     setComponents(false);
-    onOpenEditPage();
-  };
+    setPage(false);
+    setPages(true);
+    setShortPage(false);
+    setPhotoPage(false);
+    setVoiceMemoPage(false);
+    setSelectedNote(null);
+    setSelectedShort(null);
+    setSelectedPhoto(null);
+  }
 
-  const handleEditShortPageClick = (key: any) => {
-    setSelectedShortPage(key);
-    setPages(false);
-    setPage(false);
-    setComponents(false);
-  };
+  useEffect(() => {
+    if (page || components || shortPage || photoPage || voiceMemoPage || selectedNote || selectedShort || selectedPhoto) {
+      setShowPlus(false)
+    } else {
+      setShowPlus(true)
+    }
+  }, [page, components, voiceMemoPage, shortPage, photoPage, voiceMemoPage, selectedNote, selectedShort, selectedPhoto])
 
-  const handleMemoPageClick = (memoPage: any) => {
-    setSelectedMemoPage(memoPage);
-    setPages(false);
-    setPage(false);
-    setComponents(false);
-  };
+  const onDelete = () => {
+    handleSwitchChange('Notebook');
+  }
+
+  useClickOutside(notebookRef, () => setShowCloseButton(false));
 
   return (
-    <div className={css.Main} onClick={onOpen}>
+    <div 
+      className={`${css.Main} ${showCloseButton ? css.Shake : ""}`} 
+      onMouseUp={handleMouseUp} 
+      onClick={() => {
+        if (showCloseButton) {
+          return;
+        }
+        onOpen();
+      }}
+      ref={notebookRef}>
+      {showCloseButton && (
+        <div className={`${css.CloseButton}`} onClick={onDelete}>
+          <FontAwesomeIcon icon={faMinus} />
+        </div>
+      )}
       <img src={book} alt="" className={css.Image} />
       <h1 className={css.Text}>Notebook</h1>
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
+        onClose={handleModalClose}
         className={css.Modal}
         backdrop="blur"
         size="2xl"
@@ -211,88 +124,38 @@ const Notebook = () => {
                 Notebook
               </ModalHeader>
               <ModalBody>
-                {pages && (
-                  <div>
-                    {components ? (
-                      <Pages
-                        setPages={setPages}
-                        setPage={setPage}
-                        setComponents={setComponents}
-                        setVoiceMemoPage={setVoiceMemoPage}
-                        setShortPage={setShortPage}
-                        setPhotoPage={setPhotoPage}
-                      />
-                    ) : (
-                      <div className={css.Scroll}>
-                          <div className={css.ScrollableTable}>
-                            <Notes />
-                          </div>
-                          <div>
-                            <Memos />
-                          </div>
-                          <div className={css.ScrollableTable}>
-                            <Shorts />
-                          </div>
-                          <div className={css.ScrollableTable}>
-                            <Photos />
-                          </div>
-                      </div>
-                    )}
-                  </div>
-                )}
-                {selectedPage && (
-                  <div>
-                    <EditPage
-                      selectedPage={selectedPage}
-                      onSaveToStorage={handleSavePage}
-                      onCloseEditPage={onCloseEditPage}
-                    />
-                  </div>
-                )}
-                {selectedMemoPage && (
-                  <div>
-                    <EditMemoPage selectedPage={selectedMemoPage} />
-                  </div>
-                )}
-                {selectedShortPage && (
-                  <div>
-                    <EditShortPage selectedPage={selectedShortPage} />
-                  </div>
-                )}
-                {page && (
-                  <div>
-                    <NewPage
-                      pageName={pageName}
-                      handleInputChange={handleInputChange}
-                      onSaveToStorage={handleSavePage}
-                    />
-                  </div>
-                )}
-                {voiceMemoPage && (
-                  <div>
-                    <VoiceMemoPage
-                      handleInputChange={handleInputChange}
-                      pageName={pageName}
-                      onSaveToStorage={handleSavePage}
-                    />
-                  </div>
-                )}
-                {shortPage && (
-                  <div>
-                    <ShortPage
-                      handleInputChange={handleInputChange}
-                      pageName={pageName}
-                    />
-                  </div>
-                )}
-                {photoPage && (
-                  <div>
-                    <PhotoPage />
-                  </div>
-                )}
+                <Pages        
+                  pages={pages}
+                  components={components}
+                  setPages={setPages}
+                  setPage={setPage}
+                  setComponents={setComponents}
+                  setVoiceMemoPage={setVoiceMemoPage}
+                  setShortPage={setShortPage}
+                  setPhotoPage={setPhotoPage}
+                  onSelectNote={onSelectNote}
+                  onSelectShort={onSelectShort}
+                  onSelectPhoto={onSelectPhoto}
+                />
+
+                <EditPages 
+                  selectedNote={selectedNote}
+                  selectedShort={selectedShort}
+                  selectedPhoto={selectedPhoto}
+                />
+
+                <CreatePages
+                  page={page}
+                  pageName={pageName}
+                  handleInputChange={handleInputChange}
+                  onSaveToStorage={handleSavePage}
+                  voiceMemoPage={voiceMemoPage}
+                  shortPage={shortPage}
+                  photoPage={photoPage}
+                />
               </ModalBody>
               <ModalFooter>
-                <img src={plus} alt="" onClick={handleClick} />
+                { showPlus && <img src={plus} alt="" onClick={handleClick} /> }
               </ModalFooter>
             </>
           )}

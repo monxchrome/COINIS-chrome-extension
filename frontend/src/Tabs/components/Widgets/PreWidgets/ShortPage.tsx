@@ -40,13 +40,31 @@ const ShortPage = ({ pageName, onSaveToStorage, handleInputChange }: any) => {
       };
     
       const handleSaveToStorage = async () => {
-        // Use the page name as part of the storage key
+        const timestamp = Date.now();
         const storageKey = `shortContent_${pageName}`;
-        chrome.storage.sync.set({ [storageKey]: content }, () => {
-          console.log('Content saved to Chrome Storage with Key:', storageKey);
-          onSaveToStorage(storageKey); // Notify the parent component about the saved key
+      
+        // Получить текущее содержимое хранилища
+        chrome.storage.sync.get({ storageObjectShortKey: {} }, (result) => {
+          const currentData = result.storageObjectShortKey;
+      
+          // Создать новый объект
+          const newData = {
+            id: timestamp,
+            pageName: pageName,
+            content: content
+          };
+      
+          // Объединить текущий объект с новым объектом
+          const updatedData = { ...currentData, [storageKey]: newData };
+      
+          // Сохранить обновленный объект в хранилище
+          chrome.storage.sync.set({ storageObjectShortKey: updatedData }, () => {
+            console.log('Content saved to Chrome Storage as an object with Key:', storageKey);
+            onSaveToStorage(storageKey);
+          });
         });
-      };
+      };  
+
     return (
         <div>
             <Input

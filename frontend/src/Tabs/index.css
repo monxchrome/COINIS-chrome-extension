@@ -106,6 +106,10 @@ html[data-theme="light"] {
   --background-color: rgba(255, 255, 255, 0);
 }
 
+svg[aria-hidden="true"][role="presentation"] path {
+  stroke: #ffffff !important;
+}
+
 html[data-theme="dark"] {
   --background-main: transparent
     linear-gradient(118deg, #2a4378 0%, #103783 100%) 0% 0% no-repeat padding-box;

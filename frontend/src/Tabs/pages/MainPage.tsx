@@ -23,7 +23,7 @@ const MainPage = () => {
   return (
     <DndProvider backend={HTML5Backend}>
       <div className={css.Main}>
-        <Clock />
+        {switchStates.Clock && <Clock />}
         <Main />
         <Buttons />
         <div className={css.MusicContainer}>

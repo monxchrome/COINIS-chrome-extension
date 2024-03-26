@@ -33,6 +33,8 @@
     "react-scripts": "5.0.1",
     "react-soundplayer": "^1.0.5",
     "react-voice-recorder-player": "^1.1.0",
+    "reshake": "^2.0.0",
+    "styled-components": "^6.1.8",
     "typescript": "^4.4.2",
     "uuid": "^9.0.1",
     "web-vitals": "^2.1.0"

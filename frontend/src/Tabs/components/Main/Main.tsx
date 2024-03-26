@@ -1,7 +1,5 @@
-import React, { useState } from "react";
 import { useSwitchContext } from "../../../Contexts/SwitchContext";
 import Search from "../Widgets/Search";
-import Music from "../Widgets/Music";
 
 import css from "./styles/main.module.css";
 import SpeedDial from "../Widgets/SpeedDial";

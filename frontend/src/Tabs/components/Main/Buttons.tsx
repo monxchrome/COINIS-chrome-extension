@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
 
-import plus from '../../../assets/resources/plus.svg';
-import web from '../../../assets/resources/web.svg';
-import settings from '../../../assets/resources/settings.svg';
+import plus from "../../../assets/resources/plus.svg";
+import web from "../../../assets/resources/web.svg";
+import settings from "../../../assets/resources/settings.svg";
 
-import css from './styles/buttons.module.css';
+import css from "./styles/buttons.module.css";
 
 const Buttons = () => {
   const [buttons, setButtons] = useState([
-    { id: 'widgets', src: plus, alt: 'Plus Icon' },
-    { id: 'web', src: web, alt: 'Web Icon' },
-    { id: 'settings', src: settings, alt: 'Settings Icon' },
+    { id: "widgets", src: plus, alt: "Plus Icon" },
+    { id: "web", src: web, alt: "Web Icon" },
+    { id: "settings", src: settings, alt: "Settings Icon" },
   ]);
 
   const onDragEnd = (result: DropResult) => {
@@ -31,12 +36,20 @@ const Buttons = () => {
     <div className={css.Main}>
       <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="icons" direction="horizontal">
-          {(provided) => (
-            <div {...provided.droppableProps} ref={provided.innerRef} className={css.Tabs}>
+          {provided => (
+            <ul
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              className={css.Tabs}
+            >
               {buttons.map((button, index) => (
-                <Draggable key={button.id} draggableId={button.id} index={index}>
-                  {(provided) => (
-                    <div
+                <Draggable
+                  key={button.id}
+                  draggableId={button.id}
+                  index={index}
+                >
+                  {provided => (
+                    <li
                       {...provided.draggableProps}
                       {...provided.dragHandleProps}
                       ref={provided.innerRef}
@@ -45,11 +58,12 @@ const Buttons = () => {
                       <Link to={`/${button.id}`}>
                         <img src={button.src} alt={button.alt} />
                       </Link>
-                    </div>
+                    </li>
                   )}
                 </Draggable>
               ))}
-            </div>
+              {provided.placeholder}
+            </ul>
           )}
         </Droppable>
       </DragDropContext>

@@ -1,24 +1,26 @@
 .Main {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .Tabs {
-    width: 400px;
-    margin-top: 2vh;
-    display: flex;
-    justify-content: space-evenly;
+  width: 400px;
+  margin-top: 2vh;
+  display: grid;
+  grid-template-columns: repeat(3, 0fr);
+  justify-content: center;
 }
 
 .Icons {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 60px;
-    height: 60px;
-    border-radius: 100px;
-    border: var(--border);
-    background: var(--background);
-    backdrop-filter: var(--backdrop-filter);
-    -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+  display: flex;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+  border: var(--border);
+  background: var(--background);
+  backdrop-filter: var(--backdrop-filter);
+  -webkit-backdrop-filter: var(--webkit-backdrop-filter);
 }

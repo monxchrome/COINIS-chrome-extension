@@ -5,6 +5,7 @@ import { HashRouter as Router } from 'react-router-dom';
 import { NextUIProvider } from '@nextui-org/react';
 import { AuthProvider } from '../Contexts/AuthContext';
 import { SwitchProvider } from '../Contexts/SwitchContext';
+import { MouseProvider } from '../Contexts/MouseContext';
 
 
 function init() {
@@ -19,7 +20,9 @@ function init() {
         <Router>
             <AuthProvider>
                 <SwitchProvider>
-                    <Tabs/>
+                    <MouseProvider>
+                        <Tabs/>
+                    </MouseProvider>
                 </SwitchProvider>
             </AuthProvider>
         </Router>

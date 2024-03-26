@@ -1,0 +1,89 @@
+.TableCell {
+  margin: 10px;
+  display: flex;
+  flex: 0 0 20%;
+  box-sizing: border-box;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 200px;
+  height: 60px;
+  background: var(--background);
+  border-radius: 30px;
+  opacity: 1;
+  backdrop-filter: var(--backdrop-filter);
+  -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+}
+
+.NoteContainer {
+  position: relative;
+}
+
+/* Добавьте стили по вашему усмотрению для изображения и текста */
+.TableCell img {
+  padding-right: 10px;
+  max-width: 100%;
+  height: auto;
+}
+
+.TableCell p {
+  color: white;
+}
+
+.Icon {
+  width: 45px;
+  height: 50px;
+}
+
+.Desc {
+  font-weight: bold;
+  font-size: medium;
+}
+
+.CloseButton {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 5px;
+  border-radius: 10px;
+  padding-left: 5px;
+  height: 22px;
+  padding-right: 5px;
+  right: 5px;
+  background: rgb(255 255 255 / 94%);
+  backdrop-filter: var(--backdrop-filter);
+  -webkit-backdrop-filter: var(--webkit-backdrop-filter);
+  cursor: pointer;
+  z-index: 100;
+}
+
+@keyframes keyframes1 {
+  0% {
+    transform: rotate(-1deg);
+    animation-timing-function: ease-in;
+  }
+
+  50% {
+    transform: rotate(1.5deg);
+    animation-timing-function: ease-out;
+  }
+}
+
+@keyframes keyframes2 {
+  0% {
+    transform: rotate(1deg);
+    animation-timing-function: ease-in;
+  }
+
+  50% {
+    transform: rotate(-1.5deg);
+    animation-timing-function: ease-out;
+  }
+}
+
+.Shake {
+  animation: keyframes1 0.4s ease-in-out infinite alternate,
+    keyframes2 0.4s ease-in-out infinite alternate;
+}

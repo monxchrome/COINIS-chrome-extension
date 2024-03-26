@@ -1,0 +1,10 @@
+.Father {
+    display: flex;
+    justify-content: center;
+}
+
+.Image {
+    width: 300px;
+    object-fit: contain;
+    object-position: center;
+}

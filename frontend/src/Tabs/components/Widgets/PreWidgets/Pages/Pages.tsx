@@ -1,73 +1,65 @@
 import React from "react";
+import PagesList from "./PagesList";
+import Notes from "./Notes/Notes";
+import Memos from "./Memo/Memos";
+import Shorts from "./Shorts/Shorts";
+import Photos from "./Photos/Photos";
 
-import css from './styles/pages.module.css'
+import css from "./styles/pages.module.css";
 
-import newPage from "../../../../assets/resources/newPage.svg";
-import voiceMemo from "../../../../assets/resources/voiceMemo.svg";
-import shortNote from "../../../../assets/resources/shortNote.svg";
-import photoNote from "../../../../assets/resources/photoNote.svg";
-
-const Pages = ({setPages, setPage, setComponents, setVoiceMemoPage, setShortPage, setPhotoPage}: any) => {
-    const handlePageClick = () => {
-        setPages(false);
-        setPage(true);
-        setComponents(false);
-      };
-    
-      const handleMemoClick = () => {
-        setVoiceMemoPage(true);
-        setPages(false);
-        setComponents(false);
-      };
-    
-      const handleShortClick = () => {
-        setShortPage(true);
-        setPages(false);
-        setComponents(false);
-      };
-    
-      const handlePhotoClick = () => {
-        setPhotoPage(true);
-        setPages(false);
-        setComponents(false);
-      };
-
+const Pages = ({
+  components,
+  setPages,
+  setPage,
+  setComponents,
+  setVoiceMemoPage,
+  setShortPage,
+  setPhotoPage,
+  pages,
+  onSelectNote,
+  onSelectShort,
+  onSelectPhoto
+}: any) => {
   return (
     <div>
-      <div className={css.Father}>
-        <div className={css.Mother}>
-          <img
-            src={newPage}
-            className={css.Img}
-            onClick={handlePageClick}
-            alt=""
-          />
+      {pages && (
+        <div>
+          {components ? (
+            <PagesList
+              setPages={setPages}
+              setPage={setPage}
+              setComponents={setComponents}
+              setVoiceMemoPage={setVoiceMemoPage}
+              setShortPage={setShortPage}
+              setPhotoPage={setPhotoPage}
+            />
+          ) : (
+            <div className={css.Scroll}>
+              <div className={css.ScrollableTable}>
+                <Notes
+                  setPages={setPages}
+                  onSelectNote={onSelectNote}
+                 />
+              </div>
+              <div>
+                <Memos />
+              </div>
+              <div className={css.ScrollableTable}>
+                <Shorts
+                  setPages={setPages}
+                  onSelectShort={onSelectShort}
+                 />
+              </div>
+              <div className={css.ScrollableTable}>
+                <Photos
+                  setPages={setPages}
+                  onSelectPhoto={onSelectPhoto}
+                 />
+              </div>
+            </div>
+          )}
         </div>
-        <div className={css.Mother}>
-          <img
-            src={voiceMemo}
-            className={css.Img}
-            onClick={handleMemoClick}
-            alt=""
-          />
-        </div>
-        <div className={css.Mother}>
-          <img
-            src={shortNote}
-            className={css.Img}
-            onClick={handleShortClick}
-            alt=""
-          />
-        </div>
-        <div className={css.Mother}>
-          <img
-            src={photoNote}
-            className={css.Img}
-            onClick={handlePhotoClick}
-            alt=""
-          />
-        </div>
-      </div>
+      )}
     </div>
   );
 };
