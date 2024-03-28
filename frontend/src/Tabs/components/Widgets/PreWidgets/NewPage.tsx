@@ -5,8 +5,9 @@ import css from './styles/newPage.module.css'
 import { Button, Input } from '@nextui-org/react';
 import ReactQuill from 'react-quill';
 import { useTheme } from '../../../hooks/useTheme';
+import chromeStorageService from '../../../services/chromeStorageService';
 
-const NewPage = ({ pageName, onSaveToStorage, handleInputChange }: any) => {
+const NewPage = ({ pageName, onSaveToStorage, handleInputChange, handleModalClose, setPages }: any) => {
   const [content, setContent] = useState('');
   const { theme } = useTheme();
 
@@ -41,29 +42,10 @@ const NewPage = ({ pageName, onSaveToStorage, handleInputChange }: any) => {
   };
 
   const handleSaveToStorage = async () => {
-    const timestamp = Date.now();
-    const storageKey = `pageContent_${pageName}`;
-  
-    // Получить текущее содержимое хранилища
-    chrome.storage.sync.get({ storageObjectKey: {} }, (result) => {
-      const currentData = result.storageObjectKey;
-  
-      // Создать новый объект
-      const newData = {
-        id: timestamp,
-        pageName: pageName,
-        content: content
-      };
-  
-      // Объединить текущий объект с новым объектом
-      const updatedData = { ...currentData, [storageKey]: newData };
-  
-      // Сохранить обновленный объект в хранилище
-      chrome.storage.sync.set({ storageObjectKey: updatedData }, () => {
-        console.log('Content saved to Chrome Storage as an object with Key:', storageKey);
-        onSaveToStorage(storageKey);
-      });
-    });
+    chromeStorageService.createNote(pageName, content, onSaveToStorage);
+    const pages = await chromeStorageService.getNotes()
+    setPages(pages)
+    handleModalClose();
   };  
 
   return (

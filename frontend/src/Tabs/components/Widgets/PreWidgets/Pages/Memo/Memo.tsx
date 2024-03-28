@@ -11,6 +11,8 @@ import css from "./styles/memo.module.css";
 import { useMouseContext } from "../../../../../../Contexts/MouseContext";
 import indexedDBService from "../../../../../services/indexedDBService";
 import useClickOutside from "../../../../../../hoc/useClickOutside";
+import useAnimation from "../../../../../hooks/useAnimation";
+import { motion } from "framer-motion";
 
 const Memo = ({ memos, onDeleteMemo }: any) => {
   const { pageName, audioBlob, id } = memos;
@@ -18,6 +20,7 @@ const Memo = ({ memos, onDeleteMemo }: any) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
   const { showCloseButton, setShowCloseButton, handleMouseDown, handleMouseUp } = useMouseContext();
+  const { showAnimation, hideAnimation, isVisible, setIsVisible } = useAnimation(true);
   const [seekbarValue, setSeekbarValue] = useState(0);
   const memoRef = useRef(null);
 
@@ -74,7 +77,10 @@ const Memo = ({ memos, onDeleteMemo }: any) => {
   }, [audioBlob]);
 
   const onDelete = () => {
-    indexedDBService
+    setIsVisible(false);
+
+    setTimeout(() => {
+      indexedDBService
       .deleteMemo(id)
       .then(() => {
         onDeleteMemo();
@@ -83,21 +89,25 @@ const Memo = ({ memos, onDeleteMemo }: any) => {
       .catch((error: any) => {
         console.log("INDEXED DB ERROR: ", error);
       });
+    }, 1000)
   };
 
   useClickOutside(memoRef, () => setShowCloseButton(false));
 
   return (
-    <div
+    <motion.div
       className={`${css.EditMemoPage} ${showCloseButton ? css.Shake : ""}`}
       ref={memoRef}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
+      initial={hideAnimation}
+      animate={isVisible ? showAnimation : hideAnimation}
+      transition={{ ease: "easeOut", duration: 0.3 }}
     >
       {showCloseButton && (
-        <div className={`${css.CloseButton}`} onClick={onDelete}>
+        <motion.button className={`${css.CloseButton}`} onClick={onDelete} whileTap={{ scaleX: 0.95, scaleY: 0.95 }}>
           <FontAwesomeIcon icon={faMinus} />
-        </div>
+        </motion.button>
       )}
       {audioBlob && (
         <div className={css.AudioPlayer}>
@@ -136,7 +146,7 @@ const Memo = ({ memos, onDeleteMemo }: any) => {
           <span className={css.Title}>{pageName}</span>
         </div>
       )}
-    </div>
+    </motion.div>
   );
 };
 

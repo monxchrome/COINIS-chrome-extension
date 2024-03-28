@@ -21,7 +21,7 @@ export const MouseProvider = ({ children }: any) => {
   const handleMouseDown = () => {
     holdTimer = setTimeout(() => {
       setShowCloseButton(true)
-    }, 2000)
+    }, 1000)
   }
 
   const handleMouseUp = () => {

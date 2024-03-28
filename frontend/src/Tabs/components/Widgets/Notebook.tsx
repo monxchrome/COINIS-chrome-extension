@@ -14,16 +14,19 @@ import book from "../../../assets/resources/book.svg";
 import Pages from "./PreWidgets/Pages/Pages";
 import CreatePages from "./PreWidgets/Pages/CreatePages";
 import EditPages from "./PreWidgets/Pages/EditPages";
+import { motion } from "framer-motion";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus } from "@fortawesome/free-solid-svg-icons";
 import { useSwitchContext } from "../../../Contexts/SwitchContext";
 import { useMouseContext } from "../../../Contexts/MouseContext";
 import useClickOutside from "../../../hoc/useClickOutside";
+import useAnimation from "../../hooks/useAnimation";
 
 const Notebook = () => {
-  const { handleSwitchChange } = useSwitchContext();
+  const { handleSwitchChange, switchStates } = useSwitchContext();
   const { showCloseButton, setShowCloseButton, handleMouseDown, handleMouseUp } = useMouseContext();
+  const { showAnimation, hideAnimation, isVisible, setIsVisible } = useAnimation(switchStates.Notebook);
   const [components, setComponents] = useState(false);
   const [page, setPage] = useState(false);
   const [pages, setPages] = useState(true);
@@ -86,13 +89,16 @@ const Notebook = () => {
   }, [page, components, voiceMemoPage, shortPage, photoPage, voiceMemoPage, selectedNote, selectedShort, selectedPhoto])
 
   const onDelete = () => {
-    handleSwitchChange('Notebook');
-  }
+    setIsVisible(false);
+    setTimeout(() => {
+      handleSwitchChange("Notebook");
+    }, 1000); // Задержка в миллисекундах
+  };
 
   useClickOutside(notebookRef, () => setShowCloseButton(false));
 
   return (
-    <div 
+    <motion.div
       className={`${css.Main} ${showCloseButton ? css.Shake : ""}`} 
       onMouseUp={handleMouseUp} 
       onClick={() => {
@@ -101,14 +107,19 @@ const Notebook = () => {
         }
         onOpen();
       }}
+      initial={hideAnimation}
+      animate={isVisible ? showAnimation : hideAnimation}
+      transition={{ ease: "easeOut", duration: 0.3 }}
       ref={notebookRef}>
       {showCloseButton && (
-        <div className={`${css.CloseButton}`} onClick={onDelete}>
+        <motion.button className={`${css.CloseButton}`} onClick={onDelete} whileTap={{ scaleX: 0.95, scaleY: 0.95 }}>
           <FontAwesomeIcon icon={faMinus} />
-        </div>
+        </motion.button>
       )}
-      <img src={book} alt="" className={css.Image} />
-      <h1 className={css.Text}>Notebook</h1>
+      <div onMouseDown={handleMouseDown} className={css.Container}>
+        <img src={book} alt="" className={css.Image} />
+        <h1 className={css.Text}>Notebook</h1>
+      </div>
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
@@ -124,7 +135,7 @@ const Notebook = () => {
                 Notebook
               </ModalHeader>
               <ModalBody>
-                <Pages        
+                <Pages   
                   pages={pages}
                   components={components}
                   setPages={setPages}
@@ -145,10 +156,15 @@ const Notebook = () => {
                 />
 
                 <CreatePages
+                handleModalClose={handleModalClose}
+                setPages={setPages}
+                setShortPage={setShortPage}
+                setPhotoPage={setPhotoPage}
                   page={page}
                   pageName={pageName}
                   handleInputChange={handleInputChange}
                   onSaveToStorage={handleSavePage}
+                  setVoiceMemoPage={setVoiceMemoPage}
                   voiceMemoPage={voiceMemoPage}
                   shortPage={shortPage}
                   photoPage={photoPage}
@@ -161,7 +177,7 @@ const Notebook = () => {
           )}
         </ModalContent>
       </Modal>
-    </div>
+    </motion.div>
   );
 };
 

@@ -35,6 +35,28 @@ const chromeStorageService = {
         });
     });
   },
+
+  createNote: (pageName: any, content: any, onSaveToStorage: any) => {
+    const timestamp = Date.now();
+    const storageKey = `pageContent_${pageName}`;
+
+    chrome.storage.sync.get({ storageObjectKey: {} }, (result) => {
+      const currentData = result.storageObjectKey;
+
+      const newData = {
+        id: timestamp,
+        pageName: pageName,
+        content: content
+      };
+
+      const updatedData = { ...currentData, [storageKey]: newData };
+
+      chrome.storage.sync.set({ storageObjectKey: updatedData }, () => {
+        console.log('Content saved to Chrome Storage as an object with Key:', storageKey);
+        onSaveToStorage(storageKey);
+      });
+    });
+  },
    
   getShorts: () => {
     return new Promise((resolve, reject) => {
@@ -45,6 +67,29 @@ const chromeStorageService = {
           .map((key) => items[key])
 
         resolve(pages);
+      });
+    });
+  },
+
+
+  createShort: (pageName: any, content: any, onSaveToStorage: any) => {
+    const timestamp = Date.now();
+    const storageKey = `shortContent_${pageName}`;
+
+    chrome.storage.sync.get({ storageObjectShortKey: {} }, (result) => {
+      const currentData = result.storageObjectShortKey;
+
+      const newData = {
+        id: timestamp,
+        pageName: pageName,
+        content: content
+      };
+
+      const updatedData = { ...currentData, [storageKey]: newData };
+
+      chrome.storage.sync.set({ storageObjectShortKey: updatedData }, () => {
+        console.log('Short Content saved to Chrome Storage as an object with Key:', storageKey);
+        onSaveToStorage(storageKey);
       });
     });
   },

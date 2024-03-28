@@ -4,8 +4,9 @@ import ReactQuill from 'react-quill';
 import { useTheme } from '../../../hooks/useTheme';
 
 import css from './styles/shortPage.module.css'
+import chromeStorageService from '../../../services/chromeStorageService';
 
-const ShortPage = ({ pageName, onSaveToStorage, handleInputChange }: any) => {
+const ShortPage = ({ pageName, onSaveToStorage, handleInputChange, setShortPage, handleModalClose }: any) => {
     const [content, setContent] = useState('');
     const { theme } = useTheme();
 
@@ -40,29 +41,10 @@ const ShortPage = ({ pageName, onSaveToStorage, handleInputChange }: any) => {
       };
     
       const handleSaveToStorage = async () => {
-        const timestamp = Date.now();
-        const storageKey = `shortContent_${pageName}`;
-      
-        // Получить текущее содержимое хранилища
-        chrome.storage.sync.get({ storageObjectShortKey: {} }, (result) => {
-          const currentData = result.storageObjectShortKey;
-      
-          // Создать новый объект
-          const newData = {
-            id: timestamp,
-            pageName: pageName,
-            content: content
-          };
-      
-          // Объединить текущий объект с новым объектом
-          const updatedData = { ...currentData, [storageKey]: newData };
-      
-          // Сохранить обновленный объект в хранилище
-          chrome.storage.sync.set({ storageObjectShortKey: updatedData }, () => {
-            console.log('Content saved to Chrome Storage as an object with Key:', storageKey);
-            onSaveToStorage(storageKey);
-          });
-        });
+        chromeStorageService.createShort(pageName, content, onSaveToStorage);
+        const shorts = await chromeStorageService.getShorts();
+        setShortPage(shorts)
+        handleModalClose();
       };  
 
     return (

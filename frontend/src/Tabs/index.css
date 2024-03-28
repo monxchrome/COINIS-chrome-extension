@@ -2,8 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+html[data-theme="dark"] {
+  --linear-gradient: 129deg, rgba(16, 36, 53, 1) 0%, rgba(43, 110, 165, 1) 100%;
+  --backdrop-filter-special: blur(30px) brightness(105%);
+  --box-shadow: 0px 3px 6px #ffffff29;
+  --border: 0.5px solid #636363;
+  --backdrop-filter: blur(30px) brightness(100%);
+  --webkit-backdrop-filter: blur(30px) brightness(100%);
+  --color: rgb(255, 255, 255);
+  --background-special: rgba(255, 255, 255, 0.227);
+  --background: rgba(0, 0, 0, 0.327);
+  --backgorund-choice: #0000002f;
+  --background-color: rgba(0, 0, 0, 0);
+  --opacity: 0.8;
+}
+
+html[data-theme="light"] {
+  --linear-gradient: 129deg, rgba(0, 97, 255, 1) 0%, rgba(96, 239, 255, 1) 100%;
+  --backdrop-filter-special: blur(30px) brightness(55%);
+  --box-shadow: 0px 3px 6px #00000029;
+  --border: 0.5px solid #e8e8e8;
+  --backdrop-filter: blur(30px) brightness(100%);
+  --webkit-backdrop-filter: blur(30px) brightness(100%);
+  --color: white;
+  --background-special: rgba(0, 0, 0, 0.327);
+  --background: rgba(255, 255, 255, 0.227);
+  --background-modal: rgba(255, 255, 255, 0.344);
+  --backgorund-choice: #ffffff2f;
+  --background-color: rgba(255, 255, 255, 0);
+  --opacity: 1;
+}
+
 body {
-  background: var(--background-main);
+  background-image: linear-gradient(var(--linear-gradient));
+  opacity: var(--opacity);
+  transition: opacity 0.7s ease;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -89,38 +122,6 @@ body .ql-snow .ql-tooltip {
   color: white !important;
 }
 
-html[data-theme="light"] {
-  --background-main: transparent
-    linear-gradient(118deg, #0061ff 0%, #60efff 100%) 0% 0% no-repeat
-    padding-box;
-  --backdrop-filter-special: blur(30px) brightness(55%);
-  --box-shadow: 0px 3px 6px #00000029;
-  --border: 0.5px solid #e8e8e8;
-  --backdrop-filter: blur(30px) brightness(100%);
-  --webkit-backdrop-filter: blur(30px) brightness(100%);
-  --color: white;
-  --background-special: rgba(0, 0, 0, 0.327);
-  --background: rgba(255, 255, 255, 0.227);
-  --background-modal: rgba(255, 255, 255, 0.344);
-  --backgorund-choice: #ffffff2f;
-  --background-color: rgba(255, 255, 255, 0);
-}
-
 svg[aria-hidden="true"][role="presentation"] path {
   stroke: #ffffff !important;
-}
-
-html[data-theme="dark"] {
-  --background-main: transparent
-    linear-gradient(118deg, #2a4378 0%, #103783 100%) 0% 0% no-repeat padding-box;
-  --backdrop-filter-special: blur(30px) brightness(105%);
-  --box-shadow: 0px 3px 6px #ffffff29;
-  --border: 0.5px solid #636363;
-  --backdrop-filter: blur(30px) brightness(100%);
-  --webkit-backdrop-filter: blur(30px) brightness(100%);
-  --color: rgb(255, 255, 255);
-  --background-special: rgba(255, 255, 255, 0.227);
-  --background: rgba(0, 0, 0, 0.327);
-  --backgorund-choice: #0000002f;
-  --background-color: rgba(0, 0, 0, 0);
 }

@@ -1,30 +1,16 @@
-import React, { useState } from "react";
-import { openDB } from "idb";
-
 import css from "./styles/photoPage.module.css";
+import indexedDBService from "../../../services/indexedDBService";
 
-const PhotoPage = () => {
-  const [photo, setPhoto] = useState(null);
-
-  const handleFileChange = (event: any) => {
+const PhotoPage = ({ setPhotoPage, handleModalClose }: any) => {
+  const handleFileChange = async (event: any) => { // Объявляем функцию как асинхронную
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = async () => {
-        const db = await openDB("photosDB", 3, {
-          upgrade(db) {
-            db.createObjectStore("photos", {
-              keyPath: "id",
-              autoIncrement: true,
-            });
-          },
-        });
-
-        const transaction = db.transaction("photos", "readwrite");
-        const store = transaction.objectStore("photos");
-
-        const id = await store.add({ data: reader.result });
-        console.log(`Photo added with ID: ${id}`);
+        await indexedDBService.createPhoto(reader.result); // Вызываем метод createPhoto из indexedDBService
+        const photos = await indexedDBService.getPhotos(); // Получаем список фотографий после добавления
+        setPhotoPage(photos);
+        handleModalClose();
       };
 
       reader.readAsDataURL(file);
@@ -66,7 +52,6 @@ const PhotoPage = () => {
           />
         </label>
       </div>
-      {photo && <img src={photo} alt="Uploaded" />}
     </div>
   );
 };

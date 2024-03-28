@@ -4,12 +4,14 @@ import PhotoPage from "../PhotoPage";
 import ShortPage from "../ShortPage";
 import VoiceMemoPage from "../VoiceMemoPage";
 
-const CreatePages = ({page, pageName, handleInputChange, handleSavePage, voiceMemoPage, shortPage, photoPage}: any) => {
+const CreatePages = ({page, pageName, handleInputChange, handleSavePage, voiceMemoPage, shortPage, photoPage, handleModalClose, setPages, setVoiceMemoPage, setShortPage, setPhotoPage}: any) => {
   return (
     <div>
       {page && (
         <div>
           <NewPage
+          handleModalClose={handleModalClose}
+          setPages={setPages}
             pageName={pageName}
             handleInputChange={handleInputChange}
             onSaveToStorage={handleSavePage}
@@ -19,15 +21,19 @@ const CreatePages = ({page, pageName, handleInputChange, handleSavePage, voiceMe
       {voiceMemoPage && (
         <div>
           <VoiceMemoPage
+            setVoiceMemoPage={setVoiceMemoPage}
             handleInputChange={handleInputChange}
             pageName={pageName}
             onSaveToStorage={handleSavePage}
+            handleModalClose={handleModalClose}
           />
         </div>
       )}
       {shortPage && (
         <div>
           <ShortPage
+          setShortPage={setShortPage}
+          handleModalClose={handleModalClose}
             handleInputChange={handleInputChange}
             pageName={pageName}
           />
@@ -35,7 +41,7 @@ const CreatePages = ({page, pageName, handleInputChange, handleSavePage, voiceMe
       )}
       {photoPage && (
         <div>
-          <PhotoPage />
+          <PhotoPage handleModalClose={handleModalClose} setPhotoPage={setPhotoPage} />
         </div>
       )}
     </div>
